@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-
 type DataRes = {
-    word : string,
-    score : number
-}[]
+  word: string;
+  score: number;
+}[];
 
 const DebounceSearch = () => {
   const [inputVal, setInputVal] = useState("");
@@ -15,18 +14,21 @@ const DebounceSearch = () => {
   const [noResults, setNoResults] = useState(false);
   const [data, setData] = useState<DataRes>();
   useEffect(() => {
-    const controller = new AbortController()
+    const controller = new AbortController();
     if (!debounceVal) return;
 
     (async () => {
       try {
         setLoading(true);
         const res = await fetch(
-          `https://api.datamuse.com/words?sp=${debounceVal}*&max=20`, {signal : controller.signal}
+          `https://api.datamuse.com/words?sp=${debounceVal}*&max=20`,
+          { signal: controller.signal },
         );
         const results = await res.json();
-        if(results.length === 0){
-            setNoResults(true)
+        if (results.length === 0) {
+          setNoResults(true);
+        } else {
+          setNoResults(false);
         }
         setData(results);
       } catch (err) {
@@ -35,7 +37,7 @@ const DebounceSearch = () => {
         setLoading(false);
       }
     })();
-    return ()=> controller.abort()
+    return () => controller.abort();
   }, [debounceVal]);
 
   useEffect(() => {
@@ -43,14 +45,15 @@ const DebounceSearch = () => {
     return () => clearTimeout(t);
   }, [inputVal]);
 
-  const handleChange = (e) => {
-    if(e.target.value === ""){
-        setLoading(false)
-        setNoResults(false)
-        setError(false)
-        setData([])
+  const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === "") {
+      setLoading(false);
+      setNoResults(false);
+      setError(false);
+      setData([]);
     }
-    setInputVal(e.target.value)};
+    setInputVal(e.target.value);
+  };
 
   console.log(data);
   return (
@@ -68,9 +71,14 @@ const DebounceSearch = () => {
           <div key={`${item.score} ${item?.word}`}>{item.word}</div>
         ))}
       </div>
-      {error && <div>An error occured, please try again <button onClick={()=> setError(false)}>Retry</button></div> }
-      {loading && <div>Loading...</div> }
-      {noResults && <div>No results found, try to find something else</div> }
+      {error && (
+        <div>
+          An error occured, please try again{" "}
+          <button onClick={() => setError(false)}>Retry</button>
+        </div>
+      )}
+      {loading && <div>Loading...</div>}
+      {noResults && <div>No results found, try to find something else</div>}
     </div>
   );
 };
