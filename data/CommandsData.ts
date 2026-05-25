@@ -1,0 +1,15 @@
+export const COMMANDS = [
+  { id: 1, name: 'Go to Dashboard', icon: '🏠', shortcut: '⌘D' },
+  { id: 2, name: 'New Document', icon: '📄', shortcut: '⌘N' },
+  { id: 3, name: 'Open Settings', icon: '⚙️', shortcut: '⌘,' },
+  { id: 4, name: 'Search Files', icon: '🔍', shortcut: '⌘F' },
+  { id: 5, name: 'Toggle Theme', icon: '🌙', shortcut: '⌘T' },
+  { id: 6, name: 'Open Terminal', icon: '💻', shortcut: '⌘`' },
+  { id: 7, name: 'Git Commit', icon: '📦', shortcut: '⌘G' },
+  { id: 8, name: 'Format Document', icon: '✨', shortcut: '⌘S' },
+  { id: 9, name: 'Go to Dashboard', icon: '🏠', shortcut: '⌘D' },
+  { id: 10, name: 'New Document', icon: '📄', shortcut: '⌘N' },
+  { id: 11, name: 'Open Settings', icon: '⚙️', shortcut: '⌘,' },
+  { id: 12, name: 'Search Files', icon: '🔍', shortcut: '⌘F' },
+  { id: 13, name: 'Toggle Theme', icon: '🌙', shortcut: '⌘T' },
+]
